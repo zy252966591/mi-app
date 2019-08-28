@@ -1,23 +1,39 @@
+
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <div id="app">
+
+        <Nav-list></Nav-list>
+        <transition name="fade">
+            <keep-alive>
+              <router-view v-if="this.$route.meta.cache" />
+            </keep-alive>
+        </transition>
+        <transition name="fade">
+            <router-view v-if="!this.$route.meta.cache" />
+        </transition>
+    </div>
 </template>
 
 <script>
+import NavList from '@/common/navList.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    NavList
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import url("./assets/reset.css");
+@import url("./assets/common.css");
+html,
+body {
+    height: 100%;
 }
+
+#app {
+    height: 100%;
+}
+
 </style>
